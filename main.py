@@ -1,20 +1,21 @@
-import requests
-from bs4 import BeautifulSoup
+from flask import Flask, render_template, request, redirect
+
+app = Flask("SuperScrapper")
 
 
-indeed_result = requests.get(
-    'https://kr.indeed.com/%EC%B7%A8%EC%97%85?q=C%23&l=')
+@app.route("/")
+def home():
+    return render_template("potato.html")
 
-indeed_soup = BeautifulSoup(indeed_result.text, "html.parser")
 
-pagination = indeed_soup.find("div", {"class": "pagination"})
+@app.route("/report")
+def report():
+    word = request.args.get('word')
+    if word:
+        word = word.lower()
+    else:
+        return redirect("/")
+    return render_template("report.html", searchingBy=word, potato="sexy")
 
-pages = pagination.find_all("a")
 
-spans = []
-
-for page in pages:
-    spans.append(page.find("span").string)
-
-for span in spans[:-1]:
-    print(span)
+app.run(host="127.0.0.1")
