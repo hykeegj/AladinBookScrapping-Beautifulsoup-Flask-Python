@@ -101,7 +101,8 @@ def extract(keyword):
     if last_page == -1:
         print("에러발견!!!")
     else:
-        book_list = []
+        books_list = []
+        books = {}
 
         for page in range(last_page):
             print(f"키워드 {keyword}로 알라딘 추출중... 페이지 : {page+1} / {last_page}")
@@ -111,6 +112,7 @@ def extract(keyword):
             prices = extract_price(keyword, page+1)
 
             for tag, title, price in zip(tags, titles, prices):
-                book_list.extend([[tag, title, price]])
+                books = {'tag': tag, 'title': title, 'price': price}
+                books_list.append(books)
 
-    return book_list
+    return books_list

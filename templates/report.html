@@ -2,10 +2,27 @@
 <html>
   <head>
     <title>Job Search</title>
+    <style>
+      section {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    </style>
   </head>
   <body>
     <h1>Search Results</h1>
-    <h3>You are looking for {{searchingBy}}</h3>
-    {{potato}}
+    <h3>Found {{resultsNumber}} results for: {{searchingBy}}</h3>
+    <a href="/export?word={{searchingBy}}">Export to CSV</a>
+    <section>
+      <h4>Tag</h4>
+      <h4>Title</h4>
+      <h4>Price</h4>
+      {% for book in books %}
+      <span>{{book.tag}}</span>
+      <span>{{book.title}}</span>
+      <span>{{book.price}}</span>
+      {% endfor %}
+    </section>
   </body>
 </html>

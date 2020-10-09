@@ -1,7 +1,7 @@
 from aladin import extract
 from save import save_to_file
 
-search_keyword = 'react'
+search_keyword = 'asdf'
 
 books = extract(search_keyword)
 print("추출 완료!")
