@@ -9,7 +9,7 @@ db = {}
 
 @app.route("/")
 def home():
-    return render_template("potato.html")
+    return render_template("index.html")
 
 
 @app.route("/report")
@@ -46,7 +46,7 @@ def export():
 
         save_to_file(books)
 
-        return send_file("books.csv", attachment_filename='books.csv')
+        return send_file("books.csv", mimetype="text/csv", attachment_filename='books.csv', as_attachment=True)
     except:
         return redirect("/")
 
